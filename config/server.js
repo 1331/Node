@@ -9,12 +9,14 @@ module.exports = function(){
 
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({extended:true}));
+
 	app.use(expressValidador());
-	
+
 	var rotas = require('../app/routes/web');
 	rotas(app);
 
 	app.listen(8000,function(){
 		console.log("localhost:8000");
 	});
+	
 };

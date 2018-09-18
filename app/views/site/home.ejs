@@ -14,13 +14,22 @@
 			   <%}%>
 	   	    </ul>
 			<br>
+			<%if(erros){%>
+			<ul>
+			   <% for(var chaves in erros){%>
+				   <li><%= erros[chaves].msg%></li>
+			   <%}%>
+	   	    </ul>
+			<%}%>
 			<form action="/" method="post">
 				<label>Nome:</label>
-				<input type="text" name="nome" placeholder="Maria"></input>
+				<input type="text" name="nome" value="<%= dados.nome %>" placeholder="Maria"></input>
 				<br><br>
 				<label>E-mail:</label>
-				<input type="text" name="email" placeholder="maria@mail.com"></input>
+				<input type="text" name="email" value="<%= dados.email %>" placeholder="maria@mail.com"></input>
 				<button type="submit">Adicionar</button>
 			</form>
+			<br>
+
 	   </body>
 	</html>

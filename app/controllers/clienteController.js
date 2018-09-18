@@ -2,7 +2,7 @@ var clienteModel = require('../models/clienteModel')();
 
 module.exports.index = function(req,res){
 	clienteModel.all(function(erro,resultado){
-		res.render('site/home',{clientes:resultado});
+		res.render('site/home',{clientes:resultado,erros:{},dados:{}});
 	});
 };
 
@@ -11,12 +11,16 @@ module.exports.save = function(req,res){
 
 	req.assert('nome', 'Preencha um Nome.').notEmpty();
 	req.assert('email', 'Preencha um E-mail.').notEmpty();
-	req.assert('email', 'Preencha um E-mail.').isEmail();
+	req.assert('nome', 'Nome deve ter de 3 a 20 caracters').len(3,20);
+	req.assert('email', 'Preencha um E-mail valido.').isEmail();
 
 	var errosForms = req.validationErrors();
 
 	if(errosForms){
 		console.log(errosForms);
+		clienteModel.all(function(erro,resultado){
+			res.render('site/home',{clientes:resultado,erros:errosForms,dados:dados});
+		});
 		return;
 	}
 
